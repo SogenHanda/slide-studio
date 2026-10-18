@@ -1,0 +1,15 @@
+node_modules/
+.sites-runtime/
+.openai/
+project/
+saved-presentations/
+release*/
+*.app/
+*.zip
+*.dmg
+*.tmp
+*.bak
+.env
+.env.*
+!.env.example
+.DS_Store

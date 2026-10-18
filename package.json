@@ -1,0 +1,16 @@
+{
+  "name": "sogen-slide-studio",
+  "version": "4.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check dist/app.js && node --check dist/advanced.js && node --check attachments.mjs && node --check codex-bridge.mjs && node --check server.mjs && node --check build.mjs && node --check project-store.mjs && node --check dist/library.js",
+    "test": "node --test tests/advanced.test.mjs tests/codex.test.mjs tests/attachments.test.mjs tests/project-store.test.mjs tests/library.test.mjs tests/package.test.mjs",
+    "build": "node build.mjs",
+    "build:mac": "bash scripts/build-macos.sh"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

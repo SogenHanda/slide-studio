@@ -1,0 +1,13 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+const root=path.dirname(fileURLToPath(import.meta.url));
+const html=fs.readFileSync(path.join(root,'dist/index.html'),'utf8');
+const css=fs.readFileSync(path.join(root,'dist/style.css'),'utf8')+'\n'+fs.readFileSync(path.join(root,'dist/advanced.css'),'utf8');
+const app=fs.readFileSync(path.join(root,'dist/app.js'),'utf8')+'\n'+fs.readFileSync(path.join(root,'dist/advanced.js'),'utf8');
+const libraryCSS=fs.readFileSync(path.join(root,'dist/library.css'),'utf8');
+const libraryJS=fs.readFileSync(path.join(root,'dist/library.js'),'utf8');
+const script=`globalThis.STUDIO_CSS=${JSON.stringify(css+'\n'+libraryCSS)};\n${app}\n${libraryJS}`.replace(/<\/script/gi,'<\\/script');
+const output=html.replace('<link rel="stylesheet" href="style.css">',()=>`<style>${css}</style>`).replace('<link rel="stylesheet" href="advanced.css">','').replace('<script src="app.js"></script>',()=>`<script>${script}</script>`).replace('<script src="advanced.js"></script>','').replace('<link rel="stylesheet" href="library.css">',()=>`<style>${libraryCSS}</style>`).replace('<script src="library.js"></script>','');
+fs.writeFileSync(path.join(root,'dist/slide-studio.html'),output);
+console.log('Built dist/slide-studio.html');
