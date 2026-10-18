@@ -13,3 +13,6 @@ release*/
 .env.*
 !.env.example
 .DS_Store
+
+# Standalone source distribution is built from tracked source files.
+outputs/
